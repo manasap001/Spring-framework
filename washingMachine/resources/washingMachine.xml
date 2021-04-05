@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        https://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        https://www.springframework.org/schema/context/spring-context.xsd">
+        
+        <bean class="com.xworkz.washingMachine.component.PowerComponent" id="powerComponent">
+        <property name="on" value="true" ></property>
+        </bean>
+        <bean class="com.xworkz.washingMachine.component.MotorComponent" id="motorComponent">
+        <property name="warrantyPeriod" value="2"></property>
+        </bean>
+        <bean class="com.xworkz.washingMachine.component.WashingMachine" id="washingMachine">
+        <property name="companyName" value="samsung"></property>
+        <property name="capacity" value="4.5"></property>
+        <property name="power" ref="powerComponent"></property>
+        <property name="motor" ref="motorComponent" ></property>
+       
+        
+        </bean>
+        </beans>
