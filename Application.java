@@ -3,6 +3,7 @@ package com.xworkz.fooddelivery.tester;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+
 import com.xworkz.fooddelivery.entity.BillPay;
 import com.xworkz.fooddelivery.entity.CustomerEntity;
 import com.xworkz.fooddelivery.entity.FoodItemEntity;
@@ -16,18 +17,22 @@ import com.xworkz.fooddelivery.service.HotelVendorService;
 public class Application {
 
 	public static void main(String[] args) {
-		ApplicationContext container=new ClassPathXmlApplicationContext("application.xml");
+		ApplicationContext container=new ClassPathXmlApplicationContext("application.xml","application2.xml");
+	
+		
+		
 		FoodItemService service=container.getBean(FoodItemService.class);
-		FoodItemEntity entity=new FoodItemEntity("icecream",60,FoodType.dessert,3,20);
+		FoodItemEntity entity=new FoodItemEntity("pizza",120,FoodType.italian,2,10);
 		service.saveAndValidate(entity);
 		
-		CustomerService service1=container.getBean(CustomerService.class);
-		CustomerEntity entity1=new CustomerEntity("manu","bangalore",3,1589631478,BillPay.creditCard);
-		service1.saveAndValidate(entity1);
+		CustomerService cService=container.getBean(CustomerService.class);
+		CustomerEntity cEntity=new CustomerEntity("nandini","mysore",3,123546987,BillPay.phonepe);
+		cService.saveAndValidate(cEntity);
 		
-		HotelVendorService service2=container.getBean(HotelVendorService.class);
-		HotelVendorEntity entity2=new HotelVendorEntity("apoorva","ramnagar",2,VendorType.eventVendor);
-		service2.saveAndValidate(entity2);
+		HotelVendorService vService=container.getBean(HotelVendorService.class);
+		HotelVendorEntity vEntity=new HotelVendorEntity("sahana","MYSORE",3,VendorType.eventVendor);
+		vService.saveAndValidate(vEntity);
+		 
 		
 
 

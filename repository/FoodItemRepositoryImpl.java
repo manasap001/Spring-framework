@@ -1,15 +1,24 @@
 package com.xworkz.fooddelivery.repository;
 
 
-import org.hibernate.Session;
-import org.hibernate.cfg.Configuration;
+import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+import org.hibernate.criterion.Restrictions;
 
 import com.xworkz.fooddelivery.entity.FoodItemEntity;
+import com.xworkz.fooddelivery.entity.FoodType;
+
+
 
 public class FoodItemRepositoryImpl implements FoodItemRepository {
-	public FoodItemRepositoryImpl() {
+	private SessionFactory factory;
+	public FoodItemRepositoryImpl(SessionFactory factory) {
 		System.out.println("invoked"+this.getClass().getSimpleName());
+		this.factory=factory;
 	}
 	
 
@@ -17,18 +26,23 @@ public class FoodItemRepositoryImpl implements FoodItemRepository {
 	public void save(FoodItemEntity entity) {
 		System.out.println("invoked save FoodItemRepositoryImpl"+entity);
 		
-		Configuration cfg=new Configuration();
-		cfg.configure();
-		org.hibernate.SessionFactory factory=cfg.buildSessionFactory();
 		Session session=factory.openSession();
 		session.beginTransaction();
-		session.save(entity);
-		session.getTransaction().commit();
-		session.close();
-		factory.close();
-		
+		Criteria criteria = session.createCriteria(FoodItemEntity.class);
+		  criteria.add(Restrictions.eq("Name", "sahana"));
+		  
+		  List food = criteria.list();
+		  
+		  for(FoodItemEntity std : FoodItemEntity)
+		  {
+		   System.out.println(std);
+		  }
+		  session.getTransaction().commit();
+		  session.close();
+		 }
+
 		
 		
 	}
 
-}
+

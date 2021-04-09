@@ -7,8 +7,10 @@ import org.hibernate.cfg.Configuration;
 import com.xworkz.fooddelivery.entity.HotelVendorEntity;
 
 public class HotelVendorRepositoryImpl implements HotelVendorRepository {
-	public HotelVendorRepositoryImpl(){
+	private SessionFactory factory;
+	public HotelVendorRepositoryImpl(SessionFactory factory){
 		System.out.println("invoked "+this.getClass().getSimpleName());
+		this.factory=factory;
 		
 	}
 
@@ -16,15 +18,13 @@ public class HotelVendorRepositoryImpl implements HotelVendorRepository {
 	public void save(HotelVendorEntity entity) {
 		System.out.println("invoked save: "+entity);
 		
-		Configuration cfg=new Configuration();
-		cfg.configure();
-		SessionFactory factory=cfg.buildSessionFactory();
+		
 		Session session=factory.openSession();
 		session.beginTransaction();
 		session.save(entity);
 		session.getTransaction().commit();
 		session.close();
-		factory.close();
+		
 		
 		
 	}
