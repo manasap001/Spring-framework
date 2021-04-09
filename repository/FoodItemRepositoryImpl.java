@@ -28,21 +28,15 @@ public class FoodItemRepositoryImpl implements FoodItemRepository {
 		
 		Session session=factory.openSession();
 		session.beginTransaction();
-		Criteria criteria = session.createCriteria(FoodItemEntity.class);
-		  criteria.add(Restrictions.eq("Name", "sahana"));
-		  
-		  List food = criteria.list();
-		  
-		  for(FoodItemEntity std : FoodItemEntity)
-		  {
-		   System.out.println(std);
-		  }
-		  session.getTransaction().commit();
-		  session.close();
-		 }
+		session.save(entity);
+		session.getTransaction().commit();
+		session.close();
+	
 
 		
 		
 	}
+	
+}
 
 
